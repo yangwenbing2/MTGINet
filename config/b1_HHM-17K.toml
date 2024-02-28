@@ -1,0 +1,72 @@
+# Refer to utils/config.py for definition and options.
+# this is a most simple model
+
+version = "b1_lap_HHM-17K"
+dist = false
+
+[model]
+batch_size = 16
+imagenet_pretrain = true
+imagenet_pretrain_path = "pretrain/model_best_resnet34_En_nomixup.pth"
+    [model.arch]
+    encoder = "res_shortcut_encoder_29"
+    decoder = "res_shortcut_decoder_22"
+
+[train]
+total_step = 200000
+warmup_step = 10000
+val_step = 4000
+clip_grad = true
+G_lr = 1e-4
+
+semantic_weight = 10
+detail_weight = 20
+alpha_weight = 1
+comp_weight = 1
+
+# Uncomment to resume training
+#resume_checkpoint = "latest_model"
+#reset_lr = false
+
+
+[data]
+train_image = "/media/ilab/Innocent/ilab/experiments/datasets/HHM-17k/train/image"
+train_alpha = "/media/ilab/Innocent/ilab/experiments/datasets/HHM-17k/train/alpha"
+train_fg = "/media/ilab/Innocent/ilab/experiments/datasets/HHM-17k/train/fg"
+train_bg = "/media/ilab/Innocent/ilab/experiments/datasets/HHM-17k/train/bg"
+test_image = "/media/ilab/Innocent/ilab/experiments/datasets/HHM-17k/test/image"
+test_alpha = "/media/ilab/Innocent/ilab/experiments/datasets/HHM-17k/test/alpha"
+test_trimap = "/media/ilab/Innocent/ilab/experiments/datasets/HHM-17k/test/trimap"
+
+#train_image = "/media/ilab/Innocent/ilab/experiments/datasets/P3M-10k/train/blurred_image"
+#train_alpha = "/media/ilab/Innocent/ilab/experiments/datasets/P3M-10k/train/mask"
+#train_fg = "/media/ilab/Innocent/ilab/experiments/datasets/P3M-10k/train/fg"
+#train_bg = "/media/ilab/Innocent/ilab/experiments/datasets/P3M-10k/train/bg"
+#test_image = "/media/ilab/Innocent/ilab/experiments/datasets/P3M-10k/validation/P3M-500-P/blurred_image"
+#test_alpha = "/media/ilab/Innocent/ilab/experiments/datasets/P3M-10k/validation/P3M-500-P/mask"
+#test_trimap = "/media/ilab/Innocent/ilab/experiments/datasets/P3M-10k/validation/P3M-500-P/trimap"
+
+workers = 4
+augmentation = false
+
+
+[log]
+tensorboard_path = "./logs/tensorboard"
+tensorboard_step = 100
+tensorboard_image_step = 2000
+logging_path = "./logs/stdout"
+logging_step =  10
+logging_level = "INFO"
+checkpoint_path = "./checkpoints"
+checkpoint_step = 2000
+
+
+[test]
+image = "/media/ilab/Innocent/ilab/experiments/datasets/HHM-17k/test/image"
+alpha = "/media/ilab/Innocent/ilab/experiments/datasets/HHM-17k/test/alpha"
+trimap = "/media/ilab/Innocent/ilab/experiments/datasets/HHM-17k/test/trimap"
+scale = "resize"
+checkpoint = "best_model"
+fast_eval = true
+# Uncomment to save predicted alpha
+alpha_path = "prediction"

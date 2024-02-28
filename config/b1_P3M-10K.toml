@@ -1,0 +1,65 @@
+# Refer to utils/config.py for definition and options.
+# this is a most simple model
+
+version = "b1_2_P3M-10K"
+dist = false
+
+[model]
+batch_size = 20
+imagenet_pretrain = true
+imagenet_pretrain_path = "pretrain/model_best_resnet34_En_nomixup.pth"
+    [model.arch]
+    encoder = "res_shortcut_encoder_29"
+    decoder = "res_shortcut_decoder_22"
+
+[train]
+total_step = 200000
+warmup_step = 10000
+val_step = 4000
+clip_grad = true
+G_lr = 1e-4
+
+semantic_weight = 10
+detail_weight = 10
+alpha_weight = 1
+comp_weight = 1
+
+# Uncomment to resume training
+#resume_checkpoint = "latest_model"
+#reset_lr = false
+
+
+[data]
+# /media/ilab/新加卷/yangwb/datasets/HHM-17k
+# datasets/
+train_image = "datasets/P3M-10k/train/blurred_image"
+train_alpha = "datasets/P3M-10k/train/mask"
+train_fg = "datasets/P3M-10k/train/fg"
+train_bg = "datasets/P3M-10k/train/bg"
+test_image = "datasets/P3M-10k/validation/P3M-500-P/blurred_image"
+test_alpha = "datasets/P3M-10k/validation/P3M-500-P/mask"
+test_trimap = "datasets/P3M-10k/validation/P3M-500-P/trimap"
+workers = 4
+augmentation = false
+
+
+[log]
+tensorboard_path = "./logs/tensorboard"
+tensorboard_step = 100
+tensorboard_image_step = 2000
+logging_path = "./logs/stdout"
+logging_step =  10
+logging_level = "INFO"
+checkpoint_path = "./checkpoints"
+checkpoint_step = 2000
+
+
+[test]
+image = "datasets/P3M-10k/validation/P3M-500-P/blurred_image"
+alpha = "datasets/P3M-10k/validation/P3M-500-P/mask"
+trimap = "datasets/P3M-10k/validation/P3M-500-P/trimap"
+scale = "resize"
+checkpoint = "best_model"
+fast_eval = true
+# Uncomment to save predicted alpha
+alpha_path = "prediction"

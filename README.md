@@ -1,7 +1,5 @@
 # MTGINet
 
-## Introduction
-
 <h2 align="center">Multi-task Gradual Inference with A Single Encoder-Decoder Network for Automatic Portrait Matting</h2>
 
 <br />	

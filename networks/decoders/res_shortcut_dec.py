@@ -52,10 +52,6 @@ class ResShortCut_D_Dec(ResNet_D_Dec):
         super(ResShortCut_D_Dec, self).__init__(block, layers, norm_layer, large_kernel,
                                                 late_downsample=late_downsample)
 
-        # self.guide_flow4 = GFA(in_planes=128)
-        # self.guide_flow3 = GFA(in_planes=64)
-        # self.guide_flow2 = GFA(in_planes=32)
-
     def forward(self, x, mid_fea):
         fea1, fea2, fea3, fea4, fea5 = mid_fea['shortcut']
         img = mid_fea['image']
@@ -63,18 +59,12 @@ class ResShortCut_D_Dec(ResNet_D_Dec):
 
         x = self.layer1(x) + fea5
         x = self.layer2(x) + fea4
-        # se_fea4 = F.interpolate(se_fea, scale_factor=4, mode='nearest')
-        # x = self.guide_flow4(se_fea4, x) + fea4
         pred_os8 = self.refine_OS8(x)
 
         x = self.layer3(x) + fea3
-        # se_fea3 = F.interpolate(se_fea, scale_factor=8, mode='nearest')
-        # x = self.guide_flow3(se_fea3, x) + fea3
         pred_os4 = self.refine_OS4(x)
 
         x = self.layer4(x) + fea2
-        # se_fea2 = F.interpolate(se_fea, scale_factor=16, mode='nearest')
-        # x = self.guide_flow2(se_fea2, x) + fea2
         pred_os2 = self.refine_OS2(x)
 
         x = self.conv1(x)

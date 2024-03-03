@@ -17,11 +17,11 @@ PyTorch >= 1.7
 
 ## Dataset
 
-​	We construct a portrait matting dataset, termed HPM-17K, which contains 17K images and their ground-truth alpha mattes. The dataset can be downloaded from [Baidu Netdisk](https://pan.baidu.com/s/16X8cwtKzxoYKZrxIouI9hw?pwd=45v9)(pw: 45v9)
+​	We construct a portrait matting dataset, termed HPM-17K, which contains 17K images and their ground-truth alpha mattes. The dataset can be downloaded from ([Google link](https://drive.google.com/drive/folders/1oKeSOxVoEZUAwzqCAh9POuXISRlmREar?usp=sharing) | [Baidu Netdisk](https://pan.baidu.com/s/16X8cwtKzxoYKZrxIouI9hw?pwd=45v9)(pw: 45v9))
 
 ## Training
 
-​	If you want to train MTGINet, you can use the following command，and we provide pre-training weights from here([Google link]() | [Baidu Netdisk](https://pan.baidu.com/s/1F3sohx6h_NiEXBcLcZ1Keg?pwd=xnwi)(pw:xnwi)), We also provide weights([Google link]() | [Baidu Netdisk](https://pan.baidu.com/s/1rpMSYv9cbWCxaBYsCOlWZw?pwd=cjxi)(pw:cjxi)) that we trained on the HPM-17K dataset.
+​	If you want to train MTGINet, you can use the following command，and we provide pre-training weights from here([Google link](https://drive.google.com/file/d/1d3aITMxsRLEMTnuhj22-M7gzF-ntYEX2/view?usp=sharing) | [Baidu Netdisk](https://pan.baidu.com/s/1F3sohx6h_NiEXBcLcZ1Keg?pwd=xnwi)(pw:xnwi)). We also provide weights([Google link](https://drive.google.com/file/d/1IeztdGAYdfgijjkO3LA7Oqr6hySQdjB8/view?usp=sharing) | [Baidu Netdisk](https://pan.baidu.com/s/1rpMSYv9cbWCxaBYsCOlWZw?pwd=cjxi)(pw:cjxi)) that we trained on the HPM-17K dataset.
 
 ```bash
 ./train.sh

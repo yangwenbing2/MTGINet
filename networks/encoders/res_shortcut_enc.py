@@ -10,9 +10,6 @@ class ResShortCut_D(ResNet_D):
         self.shortcut_inplane = [first_inplane, self.midplanes, 64, 128, 256]
         self.shortcut_plane = [32, self.midplanes, 64, 128, 256]
 
-        # self.shortcut_inplane = [first_inplane]
-        # self.shortcut_plane = [32]
-
         self.shortcut = nn.ModuleList()
         for stage, inplane in enumerate(self.shortcut_inplane):
             self.shortcut.append(self._make_shortcut(inplane, self.shortcut_plane[stage]))
@@ -20,19 +17,12 @@ class ResShortCut_D(ResNet_D):
     def _make_shortcut(self, inplane, planes):
         return nn.Sequential(
             SpectralNorm(nn.Conv2d(inplane, planes, kernel_size=3, padding=1, bias=False)),
-            # nn.Conv2d(inplane, planes, kernel_size=3, padding=1, bias=False),
             nn.ReLU(inplace=True),
             self._norm_layer(planes),
 
             SpectralNorm(nn.Conv2d(planes, planes, kernel_size=3, padding=1, bias=False)),
-            # nn.Conv2d(inplane, planes, kernel_size=3, padding=1, bias=False),
             nn.ReLU(inplace=True),
             self._norm_layer(planes),
-
-            # SpectralNorm(nn.Conv2d(planes, planes, kernel_size=3, padding=1, bias=False)),
-            # # nn.Conv2d(inplane, planes, kernel_size=3, padding=1, bias=False),
-            # nn.ReLU(inplace=True),
-            # self._norm_layer(planes),
         )
 
     def forward(self, x):
